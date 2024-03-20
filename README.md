@@ -2,6 +2,6 @@
 
 ## Etapas para executar o código
 
-1 - Clonar repositório
+1 - Clonar o repositório
 
 https://github.com/Elenserra/Recorte-e-Reconhecimento-de-Placa.git
