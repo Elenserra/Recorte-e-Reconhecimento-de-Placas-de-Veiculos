@@ -4,4 +4,4 @@
 
 - Clonar o repositório
 
-git clone github.com/Elenserra/Recorte-e-Reconhecimento-de-Placa.git
+    git clone github.com/Elenserra/Recorte-e-Reconhecimento-de-Placa.git
