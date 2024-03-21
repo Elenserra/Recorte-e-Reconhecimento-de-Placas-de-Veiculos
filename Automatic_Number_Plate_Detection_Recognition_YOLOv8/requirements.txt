@@ -5,6 +5,7 @@ import os
 os.environ['HYDRA_FULL_ERROR'] = '1'
 
 # Base ----------------------------------------
+easyocr>=1.7.1
 hydra-core>=1.2.0
 matplotlib>=3.2.2
 numpy>=1.18.5
