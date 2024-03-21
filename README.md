@@ -23,3 +23,8 @@
 
 O sistema para detecção de placas de veículos em vídeo, com base na arquitetura You Only Look Once (YOLO) versão 8, foi treinado a partir de um dataset com imagens capturadas por câmeras estáticas localizadas em pedágios [DATASET](https://github.com/raysonlaroca/rodosol-alpr-dataset.git).
 
+
+## Reconhecimento dos Caracteres das Placas de Veículos
+
+Foi treinado um modelo CNN para realizar o reconhecimento dos caracteres. 
+
