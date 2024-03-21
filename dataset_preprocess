@@ -1,0 +1,128 @@
+
+import os
+import cv2
+import numpy as np
+import shutil
+from sklearn.model_selection import train_test_split
+
+def recortar_placa(imagem, cantos):
+    # Converter os cantos para um array numpy
+    cantos = np.array(cantos, dtype=np.float32)
+
+    # Obter um retângulo delimitador para os cantos
+    retangulo = cv2.boundingRect(cantos)
+
+    # Calcular a transformação de perspectiva a partir dos cantos
+    matriz_transformacao = cv2.getPerspectiveTransform(cantos, np.array([[0, 0], [retangulo[2], 0], [retangulo[2], retangulo[3]], [0, retangulo[3]]], dtype=np.float32))
+
+    # Aplicar a transformação à imagem original
+    placa_recortada = cv2.warpPerspective(imagem, matriz_transformacao, (retangulo[2], retangulo[3]))
+
+    return placa_recortada
+
+# Função para ler as informações do arquivo de texto
+def ler_info_txt(arquivo_txt):
+    with open(arquivo_txt, 'r') as file:
+        linhas = file.readlines()
+
+    info = {}
+    for linha in linhas:
+        chave, valor = linha.strip().split(': ')
+        info[chave] = valor
+
+    return info
+
+# Função para recortar a placa com base nas informações do arquivo de texto
+def recortar_placa_e_salvar(imagem_path, info, pasta_salvar):
+    imagem = cv2.imread(imagem_path)
+
+    # Extrair as coordenadas dos cantos do arquivo de texto
+    cantos_str = info['corners']
+    cantos = [tuple(map(int, ponto.split(','))) for ponto in cantos_str.split()]
+
+    # Extrair o texto da placa do arquivo de texto
+    placa = info['plate']
+
+    # Recortar a placa 
+    placa_recortada = recortar_placa(imagem, cantos)
+
+    # Verificar se o arquivo já existe na pasta de destino
+    nome_arquivo = f'{placa}.jpg'
+    caminho_salvar = os.path.join(pasta_salvar, nome_arquivo)
+    
+    # Salvar a placa recortada com o nome da placa no caminho especificado
+    cv2.imwrite(caminho_salvar, placa_recortada)
+    #print(f'Placa recortada salva em: {caminho_salvar}')
+    
+    return 1  # Retorna 1 para contar que uma imagem foi salva
+
+# Função para processar uma imagem
+def processar_imagem(pasta_dataset, nome_arquivo, pasta_salvar):
+    # Processar apenas arquivos de imagem
+    caminho_imagem = os.path.join(pasta_dataset, nome_arquivo)
+
+    # Obter o nome do arquivo de texto correspondente
+    nome_arquivo_base, extensao = os.path.splitext(nome_arquivo)
+    caminho_arquivo_txt = os.path.join(pasta_dataset, f'{nome_arquivo_base}.txt')
+
+    if os.path.isfile(caminho_arquivo_txt):
+        # Ler o arquivo de texto para obter os cantos e a placa
+        info = ler_info_txt(caminho_arquivo_txt)
+
+        # Recortar a placa e salvar com o nome correspondente
+        return recortar_placa_e_salvar(caminho_imagem, info, pasta_salvar)
+    else:
+        return 0  # Retorna 0 se não houver arquivo de texto correspondente
+
+# Pasta contendo as imagens e arquivos de texto
+pasta_dataset = '/home/elenserra/LSDi/data_plates'
+
+# Caminho para salvar as placas recortadas
+pasta_salvar = '/home/elenserra/LSDi/data_plates_'
+os.makedirs(pasta_salvar, exist_ok=True)
+
+# Inicializar contador de imagens salvas
+total_imagens_salvas = 0
+
+# Iterar sobre os arquivos na pasta
+for nome_arquivo in os.listdir(pasta_dataset):
+    if nome_arquivo.lower().endswith(('.jpg', '.png', '.jpeg')):
+        # Incrementar o contador de imagens salvas
+        total_imagens_salvas += processar_imagem(pasta_dataset, nome_arquivo, pasta_salvar)
+
+print(f'Total de imagens salvas: {total_imagens_salvas}')
+
+#--------------------------------------------------------------------------------
+#--------------------------------------------------------------------------------
+# Separar o conjunto em treinamento, validacao, teste
+
+# Pasta contendo as imagens
+pasta_destino = '/home/elenserra/LSDi/data_plates_'
+
+# Pasta onde os conjuntos de dados serão salvos
+pasta_treinamento = '/home/elenserra/LSDi/train'
+pasta_validacao = '/home/elenserra/LSDi/val'
+pasta_teste = '/home/elenserra/LSDi/test'
+
+# Criar pastas de treinamento, validação e teste se não existirem
+for pasta in [pasta_treinamento, pasta_validacao, pasta_teste]:
+    os.makedirs(pasta, exist_ok=True)
+
+# Listar os arquivos na pasta de destino
+arquivos = os.listdir(pasta_destino)
+
+# Dividir os dados em treinamento (80%), validação (10%) e teste (10%)
+arquivos_treinamento, arquivos_temp = train_test_split(arquivos, test_size=0.2, random_state=42)
+arquivos_validacao, arquivos_teste = train_test_split(arquivos_temp, test_size=0.5, random_state=42)
+
+# Mover os arquivos para as pastas correspondentes
+for arquivo in arquivos_treinamento:
+    shutil.move(os.path.join(pasta_destino, arquivo), os.path.join(pasta_treinamento, arquivo))
+
+for arquivo in arquivos_validacao:
+    shutil.move(os.path.join(pasta_destino, arquivo), os.path.join(pasta_validacao, arquivo))
+
+for arquivo in arquivos_teste:
+    shutil.move(os.path.join(pasta_destino, arquivo), os.path.join(pasta_teste, arquivo))
+
+print("Conjuntos de dados divididos com sucesso.")
