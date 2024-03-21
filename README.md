@@ -4,7 +4,7 @@
 
 - Clonar o repositório
      
-      git clone https://github.com/Elenserra/Recorte-e-Reconhecimento-de-Placa.git)https://github.com/Elenserra/Recorte-e-Reconhecimento-de-Placa.git
+      git clone https://github.com/Elenserra/Recorte-e-Reconhecimento-de-Placa.git
   
 - Vá para a pasta clonada
   
