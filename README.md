@@ -1,4 +1,4 @@
-#  Recorte e Reconhecimento de Placa de Veículos
+#  Recorte e Reconhecimento de Placas de Veículos
 
 ## Etapas para executar o código
 
