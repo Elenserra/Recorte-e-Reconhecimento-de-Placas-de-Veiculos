@@ -26,5 +26,5 @@ O sistema para detecção de placas de veículos em vídeo, com base na arquitet
 
 ## Reconhecimento dos Caracteres das Placas de Veículos
 
-Foi treinado um modelo CNN para realizar o reconhecimento dos caracteres. 
+Foi treinado um modelo CNN para realizar o reconhecimento dos caracteres. O mesmo [DATASET](https://github.com/raysonlaroca/rodosol-alpr-dataset.git) foi empregado,  no entanto, foi conduzido um pré-processamento adicional: as imagens das placas foram recortadas e a identificação da placa foi estabelecida pelo nome do arquivo da imagem. Por exemplo, o número da placa "ABC1234" é representado como "ABC1234.jpg". `dataset-preprocess`
 
