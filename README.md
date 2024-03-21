@@ -17,7 +17,7 @@
   
        pip install -e '.[dev]'
 
-- Para detecção e reconhecimento de placas de veículos
+- Para detecção e reconhecimento de placas de veículos (lembre de ajustar o caminho do modelo treinado no script `predict.py`)
 
       python predict.py model='/../Automatic_Number_Plate_Detection_Recognition_YOLOv8/runs/detect/train/weights/best.pt' source='caminho-do-video.mp4'
 
