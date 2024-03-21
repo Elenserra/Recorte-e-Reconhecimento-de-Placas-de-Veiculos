@@ -18,3 +18,6 @@
 
       python predict.py model='/../Automatic_Number_Plate_Detection_Recognition_YOLOv8/runs/detect/train/weights/best.pt' source='caminho-do-video.mp4'
 
+
+## Detecção de Placas de Veículos com YOLOv8n
+
