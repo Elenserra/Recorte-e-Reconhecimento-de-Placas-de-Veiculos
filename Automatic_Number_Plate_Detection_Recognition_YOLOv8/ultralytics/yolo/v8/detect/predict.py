@@ -150,8 +150,8 @@ class DetectionPredictor(BasePredictor):
                     self.model.names[c] if self.args.hide_conf else f'{self.model.names[c]} {conf:.2f}')
                 distancia_placa = self.calcular_distancia_placa(xyxy)  # Calcula a distância para cada detecção
                 
-                # Verificar se a distância da placa está entre 0.27 e 0.33 metros
-                if 0.27 <= distancia_placa <= 0.33:
+                # Verificar se a distância da placa está entre 0.27 e 0.31 metros
+                if 0.27 <= distancia_placa <= 0.31:
                     # Fazer a predição e salva
                     text_ocr, confianca_atual, net_out_value = predict_license_plate(im0, xyxy)
                     if text_ocr is not None:
@@ -215,7 +215,7 @@ def predict(cfg):
 if __name__ == "__main__":
     # Carregar o modelo LSTM+BN
     model = get_Model(training=False)
-    model.load_weights("/home/elenserra/LSDi/Automatic_Number_Plate_Detection_Recognition_YOLOv8/LSTM+BN5--epoch.hdf5")
+    model.load_weights("/../../../Automatic_Number_Plate_Detection_Recognition_YOLOv8/LSTM+BN5--epoch.hdf5")
 
     # Restaurar sys.stdout original após a execução do código
     with restore_stdout():
