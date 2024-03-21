@@ -10,9 +10,12 @@
   
       cd Automatic_Number_Plate_Detection_Recognition_YOLOv8
 
-- Instale as dependências
+- Configurar e instalar as dependências
 
-      pip install -e '.[dev]'
+       import os
+       os.environ['HYDRA_FULL_ERROR'] = '1'
+  
+       pip install -e '.[dev]'
 
 - Para detecção e reconhecimento de placas de veículos
 
