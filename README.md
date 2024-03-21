@@ -16,5 +16,5 @@
 
 - Para detecção e reconhecimento de placas de veículos
 
-      python predict.py model='caminho-do-modelo-treinado.pt' source='caminho-do-video.mp4'
+      python predict.py model='/../Automatic_Number_Plate_Detection_Recognition_YOLOv8/runs/detect/train/weights/best.pt' source='caminho-do-video.mp4'
 
