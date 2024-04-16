@@ -15,7 +15,7 @@
        import os
        os.environ['HYDRA_FULL_ERROR'] = '1'
   
-       !pip install -e '.[dev]'
+       !pip install -r requirements.txt
 
 - Para detecção e reconhecimento de placas de veículos (lembre de ajustar o caminho do modelo de reconhecimento dos caracteres `LSTM+BN5--epoch.hdf5` no script `predict.py`)
 
