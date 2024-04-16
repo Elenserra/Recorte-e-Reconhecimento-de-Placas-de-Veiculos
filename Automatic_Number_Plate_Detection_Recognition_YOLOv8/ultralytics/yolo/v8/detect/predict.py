@@ -215,7 +215,7 @@ def predict(cfg):
 if __name__ == "__main__":
     # Carregar o modelo LSTM+BN
     model = get_Model(training=False)
-    model.load_weights("/../../../Automatic_Number_Plate_Detection_Recognition_YOLOv8/LSTM+BN5--epoch.hdf5")
+    model.load_weights("/home/elenserra/LSDi/Automatic_Number_Plate_Detection_Recognition_YOLOv8/LSTM+BN5--epoch.hdf5")
 
     # Restaurar sys.stdout original após a execução do código
     with restore_stdout():
