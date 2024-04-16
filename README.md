@@ -8,7 +8,7 @@
   
 - Vá para a pasta clonada
   
-      %cd Automatic_Number_Plate_Detection_Recognition_YOLOv8
+      %cd /.../Automatic_Number_Plate_Detection_Recognition_YOLOv8
 
 - Configurar e instalar as dependências
 
