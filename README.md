@@ -4,22 +4,22 @@
 
 - Clonar o repositório
      
-      git clone https://github.com/Elenserra/Recorte-e-Reconhecimento-de-Placa.git
+      !git clone https://github.com/Elenserra/Recorte-e-Reconhecimento-de-Placa.git
   
 - Vá para a pasta clonada
   
-      cd Automatic_Number_Plate_Detection_Recognition_YOLOv8
+      %cd Automatic_Number_Plate_Detection_Recognition_YOLOv8
 
 - Configurar e instalar as dependências
 
        import os
        os.environ['HYDRA_FULL_ERROR'] = '1'
   
-       pip install -e '.[dev]'
+       !pip install -e '.[dev]'
 
 - Para detecção e reconhecimento de placas de veículos (lembre de ajustar o caminho do modelo de reconhecimento dos caracteres `LSTM+BN5--epoch.hdf5` no script `predict.py`)
 
-      python predict.py model='/../Automatic_Number_Plate_Detection_Recognition_YOLOv8/runs/detect/train/weights/best.pt' source='caminho-do-video.mp4'
+      !python3 predict.py model='/../Automatic_Number_Plate_Detection_Recognition_YOLOv8/runs/detect/train/weights/best.pt' source='caminho-do-video.mp4'
 
 
 ## Detecção de Placas de Veículos com YOLOv8n
