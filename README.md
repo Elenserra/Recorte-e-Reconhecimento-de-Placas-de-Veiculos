@@ -21,7 +21,7 @@
 
       %cd /.../.../Automatic_Number_Plate_Detection_Recognition_YOLOv8/ultralytics/yolo/v8/detect
 
-      !python3 predict.py model='/../Automatic_Number_Plate_Detection_Recognition_YOLOv8/runs/detect/train/weights/best.pt' source='caminho-do-video.mp4'
+      !python3 predict.py model='/../Automatic_Number_Plate_Detection_Recognition_YOLOv8/runs/detect/train/weights/best.pt' source='caminho-do-video.mp4' save_txt=True
 
 
 ## Detecção de Placas de Veículos com YOLOv8n
