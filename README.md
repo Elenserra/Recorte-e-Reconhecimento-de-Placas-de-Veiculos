@@ -17,7 +17,7 @@
   
        !pip install -r requirements.txt
 
-- Para detecção e reconhecimento de placas de veículos (lembre de ajustar o caminho do modelo de reconhecimento dos caracteres `LSTM+BN5--epoch.hdf5` no script `predict.py`)
+- Para detecção e reconhecimento de placas de veículos (lembre de ajustar o caminho do modelo de reconhecimento dos caracteres `LSTM+BN5---test2.hdf5` no script `predict.py`)
 
       %cd /.../.../Automatic_Number_Plate_Detection_Recognition_YOLOv8/ultralytics/yolo/v8/detect
 
