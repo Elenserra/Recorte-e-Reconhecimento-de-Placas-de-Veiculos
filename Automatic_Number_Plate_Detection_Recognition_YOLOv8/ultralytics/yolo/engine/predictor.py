@@ -91,15 +91,41 @@ class BasePredictor:
         self.data_path = None
         self.callbacks = defaultdict(list, {k: [v] for k, v in callbacks.default_callbacks.items()})  # add callbacks
         callbacks.add_integration_callbacks(self)
-
+    
     def preprocess(self, img):
         pass
 
-    def get_annotator(self, img):
-        raise NotImplementedError("get_annotator function needs to be implemented")
+    def get_annotator(self, im0):
+        return Annotator(im0, line_width=3, example=str(self.model.names))
+    
+    class Annotator:
+        def __init__(self, image, line_width=None, example=None):
+            self.image = image
+            self.lw = line_width or max(round(sum(image.shape) / 2 * 0.003), 2)  # line width
+            self.tf = max(self.lw - 1, 1)  # font thickness
+            self.font = cv2.FONT_HERSHEY_SIMPLEX
+            self.colors = {i: [random.randint(0, 255) for _ in range(3)] for i in range(1000)}
+        
+        def box_label(self, xyxy, label='', color=(128, 128, 128), txt_color=(255, 255, 255)):
+            c1, c2 = (int(xyxy[0]), int(xyxy[1])), (int(xyxy[2]), int(xyxy[3]))
+            cv2.rectangle(self.image, c1, c2, color, thickness=self.lw, lineType=cv2.LINE_AA)
+            if label:
+                tf = max(self.lw - 1, 1)  # font thickness
+                w, h = cv2.getTextSize(label, 0, fontScale=self.lw / 3, thickness=tf)[0]  # text width, height
+                outside = c1[1] - h >= 3
+                c2 = c1[0] + w, c1[1] - h - 3 if outside else c1[1] + h + 3
+                cv2.rectangle(self.image, c1, c2, color, -1, cv2.LINE_AA)  # filled
+                cv2.putText(self.image, label, (c1[0], c1[1] - 2 if outside else c1[1] + h + 2), 0, self.lw / 3,
+                            txt_color, thickness=tf, lineType=cv2.LINE_AA)
+    
+        def result(self):
+            return self.image
 
     def write_results(self, pred, batch, print_string):
         raise NotImplementedError("print_results function needs to be implemented")
+
+    def postprocess(self, preds, img, orig_img):
+        return preds
 
     def postprocess(self, preds, img, orig_img):
         return preds
@@ -131,7 +157,8 @@ class BasePredictor:
                                        stride=stride,
                                        auto=pt,
                                        transforms=getattr(model.model, 'transforms', None),
-                                       vid_stride=self.args.vid_stride)
+                                       #vid_stride=self.args.vid_stride)
+                                       vid_stride=2)
             bs = len(self.dataset)
         elif screenshot:
             self.dataset = LoadScreenshots(source,
@@ -145,7 +172,8 @@ class BasePredictor:
                                       stride=stride,
                                       auto=pt,
                                       transforms=getattr(model.model, 'transforms', None),
-                                      vid_stride=self.args.vid_stride)
+                                      #vid_stride=self.args.vid_stride)
+                                      vid_stride=2)
         self.vid_path, self.vid_writer = [None] * bs, [None] * bs
         model.warmup(imgsz=(1 if pt or model.triton else bs, 3, *imgsz))  # warmup
 
@@ -165,10 +193,17 @@ class BasePredictor:
         model.eval()
         self.seen, self.windows, self.dt = 0, [], (ops.Profile(), ops.Profile(), ops.Profile())
         self.all_outputs = []
+        frame_counter = 0  # Contador para nomear os frames
+            
+        # Criação da pasta para salvar os frames
+        frames_dir = self.save_dir / 'frames'
+        frames_dir.mkdir(parents=True, exist_ok=True)
+
         for batch in self.dataset:
             self.run_callbacks("on_predict_batch_start")
             path, im, im0s, vid_cap, s = batch
             visualize = increment_path(self.save_dir / Path(path).stem, mkdir=True) if self.args.visualize else False
+
             with self.dt[0]:
                 im = self.preprocess(im)
                 if len(im.shape) == 3:
@@ -192,9 +227,12 @@ class BasePredictor:
                     self.show(p)
 
                 if self.args.save:
-                    self.save_preds(vid_cap, i, str(self.save_dir / p.name))
+                    # Salva o frame com um nome único
+                    frame_save_path = frames_dir / f"{p.stem}_{frame_counter}.jpg"
+                    cv2.imwrite(str(frame_save_path), im0s)
+                    LOGGER.info(f"Saved frame to {frame_save_path}")
+                    frame_counter += 1  # Incrementa o contador de frames
 
-            # Print time (inference-only)
             LOGGER.info(f"{s}{'' if len(preds) else '(no detections), '}{self.dt[1].dt * 1E3:.1f}ms")
 
             self.run_callbacks("on_predict_batch_end")
@@ -210,6 +248,8 @@ class BasePredictor:
 
         self.run_callbacks("on_predict_end")
         return self.all_outputs
+
+
 
     def show(self, p):
         im0 = self.annotator.result()
@@ -240,6 +280,8 @@ class BasePredictor:
                 self.vid_writer[idx] = cv2.VideoWriter(save_path, cv2.VideoWriter_fourcc(*'mp4v'), fps, (w, h))
             self.vid_writer[idx].write(im0)
 
+
     def run_callbacks(self, event: str):
         for callback in self.callbacks.get(event, []):
             callback(self)
+
