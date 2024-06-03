@@ -26,12 +26,12 @@
 
 ## Detecção de Placas de Veículos com YOLOv8n
 
-O sistema para detecção de placas de veículos em vídeo, com base na arquitetura You Only Look Once [(YOLO)](https://github.com/MuhammadMoinFaisal/Automatic_Number_Plate_Detection_Recognition_YOLOv8.git) versão 8.
+O sistema para detecção de placas de veículos em vídeo, com base na arquitetura You Only Look Once [(YOLO)](https://github.com/MuhammadMoinFaisal/Automatic_Number_Plate_Detection_Recognition_YOLOv8.git) versão 8, foi treinado a partir de um dataset com imagens capturadas por câmeras estáticas localizadas em pedágios [DATASET](https://github.com/raysonlaroca/rodosol-alpr-dataset.git)..
 
 
 ## Reconhecimento dos Caracteres das Placas de Veículos
 
-Foi treinado um modelo CNN para realizar o reconhecimento dos caracteres. O [DATASET](https://github.com/raysonlaroca/rodosol-alpr-dataset.git), com imagens capturadas por câmeras estáticas localizadas em pedágios, utilizado no treinamento, foi conduzido um pré-processamento adicional: as imagens das placas foram recortadas e a descrição da placa passou a ser o nome do arquivo da imagem. Por exemplo, a descrição da placa "ABC1234" é representado como "ABC1234.jpg" no script `dataset_preprocess.py`. E os dados foram separados em 80/10/10, treinamento, validação e teste, respectivamente.
+Foi treinado um modelo CNN para realizar o reconhecimento dos caracteres. O mesmo [DATASET](https://github.com/raysonlaroca/rodosol-alpr-dataset.git) foi utilizado no treinamento, no entanto, foi conduzido a um pré-processamento adicional: as imagens das placas foram recortadas e a descrição da placa passou a ser o nome do arquivo da imagem. Por exemplo, a descrição da placa "ABC1234" é representado como "ABC1234.jpg" no script `dataset_preprocess.py`. E os dados foram separados em 80/10/10, treinamento, validação e teste, respectivamente.
 
 Além disso, foi utilizado a rede neural [CRNN](https://github.com/qjadud1994/CRNN-Keras.git)(combinação entre CNN e RNN), para o reconhecimento dos caracteres das placas.
 
