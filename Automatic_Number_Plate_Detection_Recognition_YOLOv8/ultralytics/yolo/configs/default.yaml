@@ -1,6 +1,6 @@
 # Ultralytics YOLO 🚀, GPL-3.0 license
 # Default training settings and hyperparameters for medium-augmentation COCO training
-distancia_inicio_metros: 5  # distância de início em metros
+distancia_inicio_metros: 1  # distância de início em metros
 pixels_por_metro: 10  # quantos pixels correspondem a um metro na imagem
 placa_real_width: 0.5  # Largura real da placa em metros
 distancia_focal: 100  # Distância focal da câmera em pixels
