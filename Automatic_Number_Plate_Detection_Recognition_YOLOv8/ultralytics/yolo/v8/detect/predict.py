@@ -39,7 +39,7 @@ def predict_license_plate(img, coordinates):
     x, y, w, h = coordinates
     x, y, w, h = int(x), int(y), int(w), int(h)
     img = img[y:h, x:w]
-
+    
     img_pred = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     img_pred = cv2.resize(img_pred, (128, 64))
     img_pred = (img_pred / 255.0) * 2.0 - 1.0
@@ -155,7 +155,7 @@ class DetectionPredictor(BasePredictor):
                         self.model.names[c] if self.args.hide_conf else f'{self.model.names[c]} {conf:.2f}')
                     distancia_placa = self.calcular_distancia_placa(xyxy)
     
-                    if 0.49 <= distancia_placa <= 0.71:
+                    if 0.40 <= distancia_placa <= 0.71:
                         cv2.rectangle(im0, (int(xyxy[0]), int(xyxy[1])), (int(xyxy[2]), int(xyxy[3])), (0, 255, 0), 2)
                         text_ocr, confianca_atual, net_out_value = predict_license_plate(im0, xyxy)
     
@@ -190,7 +190,7 @@ def predict(cfg):
 
 if __name__ == "__main__":
     model = get_Model(training=False)
-    model.load_weights("/home/elenserra/LSDi/CRNN-Keras/LSTM+BN5---test2.hdf5")
+    model.load_weights("/home/elenserra/LSDi/CRNN-Keras/LSTM+BN5---test4.hdf5")
     with restore_stdout():
         predict()
 
