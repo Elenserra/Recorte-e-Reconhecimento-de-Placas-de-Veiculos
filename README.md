@@ -31,7 +31,7 @@ O sistema para detecção de placas de veículos em vídeo, com base na arquitet
 
 ## Reconhecimento dos Caracteres das Placas de Veículos
 
-Foi treinado um modelo CNN para realizar o reconhecimento dos caracteres. O [DATASET-1](https://github.com/raysonlaroca/rodosol-alpr-dataset.git) e [DATASET-2](https://data.mendeley.com/datasets/nx9xbs4rgx/2) foram utilizados no treinamento, no entanto, o DATASET-1 foi conduzido a um pré-processamento adicional: as imagens das placas foram recortadas e a descrição da placa passou a ser o nome do arquivo da imagem. Por exemplo, a descrição da placa "ABC1234" é representado como "ABC1234.jpg" no script `dataset_preprocess.py`. E os dados foram separados em 80/10/10, treinamento, validação e teste, respectivamente.
+Foi treinado um modelo CNN para realizar o reconhecimento dos caracteres. O [DATASET-1](https://github.com/raysonlaroca/rodosol-alpr-dataset.git) e [DATASET-2](https://data.mendeley.com/datasets/nx9xbs4rgx/2) foram utilizados no treinamento, no entanto, foram conduzidos a um pré-processamento adicional: as imagens das placas foram recortadas e a descrição da placa passou a ser o nome do arquivo da imagem. Por exemplo, a descrição da placa "ABC1234" é representado como "ABC1234.jpg" no script `dataset_preprocess.py`. E os dados foram separados em 80/10/10, treinamento, validação e teste, respectivamente.
 
 Além disso, foi utilizado a rede neural [CRNN](https://github.com/qjadud1994/CRNN-Keras.git)(combinação entre CNN e RNN), para o reconhecimento dos caracteres das placas.
 
