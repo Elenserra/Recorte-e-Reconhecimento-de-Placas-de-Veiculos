@@ -190,7 +190,7 @@ def predict(cfg):
 
 if __name__ == "__main__":
     model = get_Model(training=False)
-    model.load_weights("/home/elenserra/LSDi/CRNN-Keras/LSTM+BN5---test4.hdf5")
+    model.load_weights("/../../../CRNN-Keras/LSTM+BN5---test4.hdf5")
     with restore_stdout():
         predict()
 
