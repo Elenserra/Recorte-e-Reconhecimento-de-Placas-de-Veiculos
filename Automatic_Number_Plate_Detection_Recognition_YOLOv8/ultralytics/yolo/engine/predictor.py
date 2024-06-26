@@ -157,8 +157,8 @@ class BasePredictor:
                                        stride=stride,
                                        auto=pt,
                                        transforms=getattr(model.model, 'transforms', None),
-                                       #vid_stride=self.args.vid_stride)
-                                       vid_stride=2)
+                                       vid_stride=self.args.vid_stride)
+                                       #vid_stride=2)
             bs = len(self.dataset)
         elif screenshot:
             self.dataset = LoadScreenshots(source,
@@ -172,8 +172,8 @@ class BasePredictor:
                                       stride=stride,
                                       auto=pt,
                                       transforms=getattr(model.model, 'transforms', None),
-                                      #vid_stride=self.args.vid_stride)
-                                      vid_stride=2)
+                                      vid_stride=self.args.vid_stride)
+                                      #vid_stride=2)
         self.vid_path, self.vid_writer = [None] * bs, [None] * bs
         model.warmup(imgsz=(1 if pt or model.triton else bs, 3, *imgsz))  # warmup
 
