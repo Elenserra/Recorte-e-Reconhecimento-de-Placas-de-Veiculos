@@ -8,7 +8,7 @@
   
 - Vá para a pasta clonada
   
-      %cd /.../Automatic_Number_Plate_Detection_Recognition_YOLOv8
+      %cd /.../Recorte-e-Reconhecimento-de-Placa/Automatic_Number_Plate_Detection_Recognition_YOLOv8
 
 - Configurar e instalar as dependências
 
@@ -20,9 +20,9 @@
 
 - Para detecção e reconhecimento de placas de veículos (lembre de ajustar o caminho do modelo de reconhecimento dos caracteres `LSTM+BN5---test4.hdf5` no script `predict.py`)
 
-      %cd /.../.../Automatic_Number_Plate_Detection_Recognition_YOLOv8/ultralytics/yolo/v8/detect
+      %cd /.../Recorte-e-Reconhecimento-de-Placa/Automatic_Number_Plate_Detection_Recognition_YOLOv8/ultralytics/yolo/v8/detect
 
-      !python3 predict.py model='/../Automatic_Number_Plate_Detection_Recognition_YOLOv8/runs/detect/train/weights/best.pt' source='caminho-do-video.mp4' save_txt=True
+      !python3 predict.py model='/../Recorte-e-Reconhecimento-de-Placa/Automatic_Number_Plate_Detection_Recognition_YOLOv8/runs/detect/train/weights/best.pt' source='caminho-do-video.mp4' save_txt=True
 
 
 ## Detecção de Placas de Veículos com YOLOv8n
