@@ -420,7 +420,11 @@ def predict(cfg):
 
 if __name__ == "__main__":
     model = get_Model(training=False)
+<<<<<<< HEAD
     model.load_weights("/home/elenserra/LSDi/CRNN-Keras/LSTM+BN5---test4_4.hdf5")
+=======
+    model.load_weights("/../../Recorte-e-Reconhecimento-de-Placa/CNN-keras/LSTM+BN5---test4.hdf5")
+>>>>>>> 86e73fd0242990d21a697df82586c061739d1864
     with restore_stdout():
         predict()
 
