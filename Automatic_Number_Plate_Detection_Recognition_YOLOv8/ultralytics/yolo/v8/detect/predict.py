@@ -1,7 +1,14 @@
 
 
-#com csv
 import sys
+import os
+# Adiciona o diretório pai ao caminho do Python
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '/../Recorte-e-Reconhecimento-de-Placa/Automatic_Number_Plate_Detection_Recognition_YOLOv8')))
+
+from Model import get_Model
+from parameter import letters
+
+#com csv
 import io
 import contextlib
 import itertools
@@ -15,7 +22,6 @@ from ultralytics.yolo.utils.checks import check_imgsz
 from ultralytics.yolo.utils.plotting import Annotator, save_one_box
 import cv2
 import numpy as np
-import os
 from Model import get_Model
 from parameter import letters
 
