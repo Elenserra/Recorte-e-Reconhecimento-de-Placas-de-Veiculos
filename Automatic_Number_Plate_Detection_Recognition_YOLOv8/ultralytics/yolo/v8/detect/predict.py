@@ -22,8 +22,6 @@ from ultralytics.yolo.utils.checks import check_imgsz
 from ultralytics.yolo.utils.plotting import Annotator, save_one_box
 import cv2
 import numpy as np
-from Model import get_Model
-from parameter import letters
 
 # Armazenar o valor original de sys.stdout
 sys_stdout_temp = sys.stdout
