@@ -1,4 +1,4 @@
-from keras import backend as K
+#from keras import backend as K
 from keras.layers import Conv2D, MaxPooling2D
 from keras.layers import Input, Dense, Activation
 from keras.layers import Reshape, Lambda, BatchNormalization
@@ -6,7 +6,8 @@ from keras.layers import add, concatenate
 from keras.models import Model
 from keras.layers import LSTM
 from parameter import *
-K.set_learning_phase(0)
+#K.set_learning_phase(0)
+from tensorflow.keras import backend as K
 
 # # Loss and train functions, network architecture
 def ctc_lambda_func(args):
