@@ -184,8 +184,8 @@ class DetectionPredictor(BasePredictor):
                                     # Adicionar placa detectada ao dicionário JSON
                                     detection_time = time.strftime("%Y-%m-%dT%H:%M:%S", time.gmtime(frame / 30))  # Assumindo 30 FPS
                                     photo_path = str(frame_save_path)  # Caminho da foto
-                                    latitude = 0.0  # Substitua com o valor real
-                                    longitude = 0.0  # Substitua com o valor real
+                                    latitude = 0.0  ##
+                                    longitude = 0.0  ##
                                     self.detected_plates[text_ocr] = {
                                         "timestamp": detection_time,
                                         "latitude": latitude,
