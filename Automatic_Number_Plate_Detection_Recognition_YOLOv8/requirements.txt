@@ -2,7 +2,6 @@
 # Usage: pip install -r requirements.txt
 
 # Base ----------------------------------------
-python>=3.10.2
 easyocr>=1.7.1
 hydra-core>=1.2.0
 matplotlib>=3.2.2
