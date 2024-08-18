@@ -26,7 +26,7 @@
 
 ## Detecção de Placas de Veículos com YOLOv8n
 
-O sistema para detecção de placas de veículos em vídeo, com base na arquitetura You Only Look Once [(YOLO)](https://github.com/MuhammadMoinFaisal/Automatic_Number_Plate_Detection_Recognition_YOLOv8.git) versão 8, foi treinado a partir de um dataset com imagens capturadas por câmeras estáticas localizadas em pedágios [DATASET](https://github.com/raysonlaroca/rodosol-alpr-dataset.git).
+O sistema para detecção de placas de veículos em vídeo, com base na arquitetura You Only Look Once [(YOLO)](https://github.com/MuhammadMoinFaisal/Automatic_Number_Plate_Detection_Recognition_YOLOv8.git) versão 8, foi treinado a partir de um dataset com imagens capturadas por câmeras estáticas localizadas em pedágios [DATASET](https://github.com/raysonlaroca/ufpr-alpr-dataset).
 
 
 ## Reconhecimento dos Caracteres das Placas de Veículos
