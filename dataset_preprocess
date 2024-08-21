@@ -97,12 +97,12 @@ print(f'Total de imagens salvas: {total_imagens_salvas}')
 # Separar o conjunto em treinamento, validacao, teste
 
 # Pasta contendo as imagens
-pasta_destino = '/home/elenserra/LSDi/data_plates_'
+pasta_destino = '/../Recorte-e-Reconhecimento-de-Placas-de-Veiculos'
 
 # Pasta onde os conjuntos de dados serão salvos
-pasta_treinamento = '/home/elenserra/LSDi/train'
-pasta_validacao = '/home/elenserra/LSDi/val'
-pasta_teste = '/home/elenserra/LSDi/test'
+pasta_treinamento = '/../CRNN-keras/DB/train'
+pasta_validacao = '/../CRNN-keras/DB/val'
+pasta_teste = '/../CRNN-keras/DB/test'
 
 # Criar pastas de treinamento, validação e teste se não existirem
 for pasta in [pasta_treinamento, pasta_validacao, pasta_teste]:
