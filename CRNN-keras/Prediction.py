@@ -37,10 +37,10 @@ def label_to_region(label):
 
 # Carregar o modelo treinado
 model = get_Model(training=False)
-model.load_weights("/../../../CRNN-Keras/LSTM+BN5--epoch.hdf5")
+model.load_weights("/../CRNN-Keras/LSTM+BN5--epoch.hdf5")
 
 # Pasta contendo as imagens de teste
-folder_path = "/../../../CRNN-Keras/DB/test/"
+folder_path = "/../CRNN-Keras/DB/test/"
 
 # Listar todos os arquivos na pasta
 image_files = os.listdir(folder_path)
