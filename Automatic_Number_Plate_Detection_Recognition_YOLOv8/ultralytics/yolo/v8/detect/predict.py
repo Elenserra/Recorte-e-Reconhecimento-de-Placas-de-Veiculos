@@ -3,7 +3,7 @@ import base64
 import sys
 import os
 # Adiciona o diretório pai ao caminho do Python
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '/../Recorte-e-Reconhecimento-de-Placa/Automatic_Number_Plate_Detection_Recognition_YOLOv8')))
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '/../Recorte-e-Reconhecimento-de-Placa/CNN-keras')))
 
 from Model import get_Model
 from parameter import letters
