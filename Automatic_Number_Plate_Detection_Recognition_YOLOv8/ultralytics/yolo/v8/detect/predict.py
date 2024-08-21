@@ -1,29 +1,24 @@
 
-
+import base64
 import sys
 import os
-# Adiciona o diretório raiz
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '/../Recorte-e-Reconhecimento-de-Placa')))
+# Adiciona o diretório pai ao caminho do Python
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '/../Recorte-e-Reconhecimento-de-Placa/Automatic_Number_Plate_Detection_Recognition_YOLOv8')))
 
 from Model import get_Model
 from parameter import letters
 
-#com csv
+# com csv
 import io
 import contextlib
 import itertools
-from pathlib import Path
 import csv
 import hydra
 import torch
 from ultralytics.yolo.engine.predictor import BasePredictor
 from ultralytics.yolo.utils import DEFAULT_CONFIG, ROOT, ops
 from ultralytics.yolo.utils.checks import check_imgsz
-from ultralytics.yolo.utils.plotting import Annotator, save_one_box
-import cv2
-import numpy as np
-from Model import get_Model
-from parameter import letters
+from ultralytics.yolo.utils.plotting import Annotator
 
 # Armazenar o valor original de sys.stdout
 sys_stdout_temp = sys.stdout
@@ -41,8 +36,6 @@ def decode_label(out):
         if i < len(letters):
             outstr += letters[i]
     return outstr
-
-
 
 def predict_license_plate(img, coordinates):
     x, y, w, h = coordinates
@@ -66,6 +59,12 @@ def predict_license_plate(img, coordinates):
     else:
         return None, None, None
 
+# Função para converter imagem para Base64
+def image_to_base64(image):
+    _, buffer = cv2.imencode('.jpg', image)  # Codificar a imagem como JPEG
+    image_base64 = base64.b64encode(buffer).decode('utf-8')  # Converter para Base64 e decodificar para string
+    return image_base64
+
 class DetectionPredictor(BasePredictor):
     def __init__(self, cfg):
         super().__init__(cfg)
@@ -76,6 +75,7 @@ class DetectionPredictor(BasePredictor):
         self.placas_detectadas = {}
         self.frames_bb_dir = self.save_dir / 'frames_with_bounding_boxes'
         self.frames_bb_dir.mkdir(parents=True, exist_ok=True)
+        self.detected_plates = {}  # Dicionário para armazenar as placas detectadas
 
     def get_annotator(self, img):
         return Annotator(img, line_width=self.args.line_thickness, example=str(self.model.names))
@@ -181,6 +181,26 @@ class DetectionPredictor(BasePredictor):
                                     })
                                     frame_save_path = self.frames_bb_dir / f"{p.stem}_frame_{frame}.jpg"
                                     cv2.imwrite(str(frame_save_path), im0)
+
+                                    # Adicionar placa detectada ao dicionário JSON
+                                    detection_time = time.strftime("%Y-%m-%dT%H:%M:%S", time.gmtime(frame / 30))  # Assumindo 30 FPS
+                                    photo_path = str(frame_save_path)  # Caminho da foto
+                                    latitude = 0.0  ##
+                                    longitude = 0.0  ##
+                                    
+                                    # Converter imagem para Base64
+                                    image_base64 = image_to_base64(im0)
+
+                                    self.detected_plates[text_ocr] = {
+                                        "timestamp": detection_time,
+                                        "latitude": latitude,
+                                        "longitude": longitude,
+                                        "photo": image_base64
+                                    }
+
+                                    # Salvar dicionário no arquivo JSON
+                                    with open(os.path.join(self.save_dir, 'detected_plates.json'), 'w') as json_file:
+                                        json.dump(self.detected_plates, json_file, indent=4)
                             else:
                                 # Se a placa já está no dicionário, atualize as informações se necessário
                                 if confianca_atual > float(plate_data[text_ocr]["Confiança"]):
@@ -202,5 +222,3 @@ if __name__ == "__main__":
     model.load_weights("/../Recorte-e-Reconhecimento-de-Placa/CNN-keras/LSTM+BN5---test4.hdf5")
     with restore_stdout():
         predict()
-
-

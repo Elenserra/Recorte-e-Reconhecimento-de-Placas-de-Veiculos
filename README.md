@@ -17,19 +17,16 @@
        import os
        os.environ['HYDRA_FULL_ERROR'] = '1'
 
-       !pip install --upgrade ultralytics
-       from ultralytics import YOLO
-
 - Para detecção e reconhecimento de placas de veículos (lembre de ajustar o caminho do modelo de reconhecimento dos caracteres `LSTM+BN5---test4.hdf5` no script `predict.py`)
 
       %cd /../Recorte-e-Reconhecimento-de-Placa/Automatic_Number_Plate_Detection_Recognition_YOLOv8/ultralytics/yolo/v8/detect
 
-      !yolo predict model='/../Recorte-e-Reconhecimento-de-Placa/Automatic_Number_Plate_Detection_Recognition_YOLOv8/runs/detect/train/weights/best.pt' source='caminho-do-video.mp4' save_txt=True
+      !python3 predict.py model='/../Recorte-e-Reconhecimento-de-Placa/Automatic_Number_Plate_Detection_Recognition_YOLOv8/runs/detect/train/weights/best.pt' source='caminho-do-video.mp4' save_txt=True
 
 
 ## Detecção de Placas de Veículos com YOLOv8n
 
-O sistema para detecção de placas de veículos em vídeo, com base na arquitetura You Only Look Once [(YOLO)](https://github.com/MuhammadMoinFaisal/Automatic_Number_Plate_Detection_Recognition_YOLOv8.git) versão 8, foi treinado a partir de um dataset com imagens capturadas por câmeras estáticas localizadas em pedágios [DATASET](https://github.com/raysonlaroca/rodosol-alpr-dataset.git).
+O sistema para detecção de placas de veículos em vídeo, com base na arquitetura You Only Look Once [(YOLO)](https://github.com/MuhammadMoinFaisal/Automatic_Number_Plate_Detection_Recognition_YOLOv8.git) versão 8, foi treinado a partir de um dataset com imagens capturadas por câmeras estáticas localizadas em pedágios [DATASET](https://github.com/raysonlaroca/ufpr-alpr-dataset).
 
 
 ## Reconhecimento dos Caracteres das Placas de Veículos
