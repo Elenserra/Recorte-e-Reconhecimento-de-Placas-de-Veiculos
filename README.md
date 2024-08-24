@@ -8,7 +8,7 @@
   
 - Vá para a pasta clonada
   
-      %cd /../Recorte-e-Reconhecimento-de-Placa/Automatic_Number_Plate_Detection_Recognition_YOLOv8
+      %cd /../Recorte-e-Reconhecimento-de-Placas-de-Veiculos/Automatic_Number_Plate_Detection_Recognition_YOLOv8
 
 - Configurar e instalar as dependências
 
