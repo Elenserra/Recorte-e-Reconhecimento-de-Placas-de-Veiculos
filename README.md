@@ -23,7 +23,7 @@
       %cd /../Recorte-e-Reconhecimento-de-Placas-de-Veiculos/Automatic_Number_Plate_Detection_Recognition_YOLOv8/ultralytics/yolo/v8/detect
 
       # Execute o código com o comando mencionado abaixo (para detecção das placas e reconhecimento dos caracteres)
-      !python3 predict.py model='/../Recorte-e-Reconhecimento-de-Placa/Automatic_Number_Plate_Detection_Recognition_YOLOv8/runs/detect/train/weights/best.pt' source='caminho-do-video.mp4' save_txt=True
+      !python3 predict.py model='/../Recorte-e-Reconhecimento-de-Placas-de-Veiculos/Automatic_Number_Plate_Detection_Recognition_YOLOv8/runs/detect/train/weights/best.pt' source='caminho-do-video.mp4' save_txt=True
 
 
 ## Detecção de Placas de Veículos com YOLOv8n
