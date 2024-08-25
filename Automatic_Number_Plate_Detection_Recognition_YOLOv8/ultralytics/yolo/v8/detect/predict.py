@@ -68,10 +68,10 @@ def image_to_base64(image):
 class DetectionPredictor(BasePredictor):
     def __init__(self, cfg):
         super().__init__(cfg)
-        self.distancia_inicio_metros = cfg.distancia_inicio_metros
-        self.pixels_por_metro = cfg.pixels_por_metro
-        self.placa_real_width = cfg.placa_real_width
-        self.distancia_focal = cfg.distancia_focal
+        self.distancia_inicio_metros = cfg.get('distancia_inicio_metros', 1)
+        self.pixels_por_metro = cfg.get('pixels_por_metro', 10)
+        self.placa_real_width = cfg.get('placa_real_width', 0.5)
+        self.distancia_focal = cfg.get('distancia_focal', 100)
         self.placas_detectadas = {}
         self.frames_bb_dir = self.save_dir / 'frames_with_bounding_boxes'
         self.frames_bb_dir.mkdir(parents=True, exist_ok=True)
