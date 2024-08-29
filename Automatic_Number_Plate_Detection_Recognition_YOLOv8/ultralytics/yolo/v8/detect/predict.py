@@ -13,6 +13,7 @@ import io
 import contextlib
 import itertools
 import csv
+import numpy as np
 import hydra
 import torch
 from ultralytics.yolo.engine.predictor import BasePredictor
