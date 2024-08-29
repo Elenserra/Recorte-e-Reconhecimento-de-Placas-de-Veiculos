@@ -10,6 +10,7 @@ from parameter import letters
 
 # com csv
 import io
+import cv2
 import contextlib
 import itertools
 import csv
